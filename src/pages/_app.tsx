@@ -1,13 +1,13 @@
 import {AppProps} from "next/app";
 import React from "react";
-import {useStored} from "@/store/useStored";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ThemeProvider} from "styled-components";
-import {darkTheme, lightTheme} from "@/constants/theme";
-import GlobalStyle from "@/constants/globalStyle";
 import {MantineProvider} from "@mantine/core";
 import {BrowserTracing, init, Replay} from "@sentry/nextjs";
 import localFont from "next/font/local";
+import {useStored} from "../store/useStored";
+import {darkTheme, lightTheme} from "../constants/theme";
+import GlobalStyle from "../constants/globalStyle";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -88,6 +88,7 @@ function Jsonier({Component, pageProps}: AppProps) {
                 >
                     <Component {...pageProps}/>
                 </MantineProvider>
+                <Component {...pageProps}/>
             </ThemeProvider>
         </QueryClientProvider>
     }
