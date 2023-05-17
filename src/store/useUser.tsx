@@ -18,7 +18,7 @@ const initialStates = {
 const useUser = create<UserStates & UserActions>()(
     (set, get) => ({
         ...initialStates,
-        setUser: (key, value) => set({[key], value}),
+        setUser: (key, value) => set({[key]: value}),
         isPremium: () => {
             const user = get().user;
             if (user) return user.type > 0;
