@@ -47,10 +47,10 @@ const useUser = create<UserStates & UserActions>()(
             }
 
         },
-        validatePremium: (callback) => {
+        validatePremium: (cb) => {
             if (get().isAuthenticated) {
                 if (!get().isPremium()) return useModal.getState().setVisible("premium")(true);
-                return callback();
+                return cb();
             } else {
                 return useModal.getState().setVisible("account")(true);
             }
