@@ -33,7 +33,18 @@ const useUser = create<UserStates & UserActions>()(
             useModal.setState({account: false});
             set(initialStates);
         },
-        checkSession: () => {
+        checkSession: async () => {
+            const currentSession = altogic.auth.getSession();
+            if (currentSession) {
+                const dbUser = await altogic.auth.getUserFromDB();
+                set({user: dbUser.user as any, isAuthenticated: true})
+            } else {
+                if (!new URLSearchParams(window.location.search).get("access_token")) return;
+                const data = await altogic.auth.getAuthGrant();
+                if (!data.errors?.items.length) {
+                    set({user: data.user as any, isAuthenticated: true})
+                }
+            }
 
         },
         validatePremium: () => {
