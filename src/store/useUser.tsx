@@ -47,8 +47,13 @@ const useUser = create<UserStates & UserActions>()(
             }
 
         },
-        validatePremium: () => {
-            return false
+        validatePremium: (callback) => {
+            if (get().isAuthenticated) {
+                if (!get().isPremium()) return useModal.getState().setVisible("premium")(true);
+                return callback();
+            } else {
+                return useModal.getState().setVisible("account")(true);
+            }
         },
         login: (response) => {
             set({user: response.user, isAuthenticated: true});
