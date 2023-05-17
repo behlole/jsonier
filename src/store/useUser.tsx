@@ -38,3 +38,4 @@ const useUser = create<UserStates & UserActions>()(
         }
     })
 )
+export default useUser;

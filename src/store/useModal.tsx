@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {create} from "zustand";
+import useUser from "./useUser";
 
 interface ModalActions {
     setVisible: (value: keyof typeof initialStates) => (visible: boolean) => void;
@@ -27,9 +28,10 @@ const useModal = create<ModalStates & ModalActions>(
     set => ({
         ...initialStates,
         setVisible: modal => visible => {
-            if (authModals.includes(modal)){
-
+            if (authModals.includes(modal) && !useUser.getState().isAuthenticated) {
+                return set({login: true});
             }
+            set({[modal]: visible});
         }
     })
 )
