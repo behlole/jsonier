@@ -10,3 +10,4 @@ export interface AltogicResponse<T> {
     errors: APIError | null;
 }
 
+export default altogic;

@@ -35,3 +35,4 @@ const useModal = create<ModalStates & ModalActions>(
         }
     })
 )
+export default useModal;
