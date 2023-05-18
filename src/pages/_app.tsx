@@ -8,6 +8,7 @@ import localFont from "next/font/local";
 import {useStored} from "../store/useStored";
 import {darkTheme, lightTheme} from "../constants/theme";
 import GlobalStyle from "../constants/globalStyle";
+import ModalController from "../containers/ModalController";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -87,8 +88,8 @@ function Jsonier({Component, pageProps}: AppProps) {
                     }
                 >
                     <Component {...pageProps}/>
+                    <ModalController/>
                 </MantineProvider>
-                <Component {...pageProps}/>
             </ThemeProvider>
         </QueryClientProvider>
     }
