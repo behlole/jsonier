@@ -22,11 +22,13 @@
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "altogic": "^2.3.9",
+    "lz-string": "^1.5.0",
     "next": "13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
+    "reaflow": "^5.1.2",
     "typescript": "5.0.4",
     "zustand": "^4.3.8"
   }
