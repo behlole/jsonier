@@ -9,6 +9,7 @@ import {useStored} from "../store/useStored";
 import {darkTheme, lightTheme} from "../constants/theme";
 import GlobalStyle from "../constants/globalStyle";
 import ModalController from "../containers/ModalController";
+import {Toaster} from "react-hot-toast";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -44,53 +45,64 @@ function Jsonier({Component, pageProps}: AppProps) {
         setReady(true);
     }, [])
     if (isReady) {
-        <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={isLightMode ? lightTheme : darkTheme}>
-                <GlobalStyle/>
-                <MantineProvider
-                    withGlobalStyles
-                    withCSSVariables
-                    withNormalizeCSS
-                    theme={
-                        {
-                            colorScheme: isLightMode ? "light" : "dark",
-                            fontFamily: monaSans.style.fontFamily,
-                            components: {
-                                Divider: {
-                                    styles: () => ({
-                                        root: {
-                                            borderTopColor: "#4D4D4D !important",
-                                        },
-                                    }),
+        return (<QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={isLightMode ? lightTheme : darkTheme}>
+                    <GlobalStyle/>
+                    <MantineProvider
+                        withGlobalStyles
+                        withCSSVariables
+                        withNormalizeCSS
+                        theme={
+                            {
+                                colorScheme: isLightMode ? "light" : "dark",
+                                fontFamily: monaSans.style.fontFamily,
+                                components: {
+                                    Divider: {
+                                        styles: () => ({
+                                            root: {
+                                                borderTopColor: "#4D4D4D !important",
+                                            },
+                                        }),
+                                    },
+                                    Modal: {
+                                        styles: theme => ({
+                                            title: {
+                                                fontWeight: 700,
+                                            },
+                                            header: {
+                                                backgroundColor: theme.colorScheme === "dark" ? "#36393E" : "#FFFFFF",
+                                            },
+                                            body: {
+                                                backgroundColor: theme.colorScheme === "dark" ? "#36393E" : "#FFFFFF",
+                                            },
+                                        }),
+                                    },
+                                    Button: {
+                                        styles: theme => ({
+                                            inner: {
+                                                fontWeight: 700,
+                                            },
+                                        }),
+                                    },
                                 },
-                                Modal: {
-                                    styles: theme => ({
-                                        title: {
-                                            fontWeight: 700,
-                                        },
-                                        header: {
-                                            backgroundColor: theme.colorScheme === "dark" ? "#36393E" : "#FFFFFF",
-                                        },
-                                        body: {
-                                            backgroundColor: theme.colorScheme === "dark" ? "#36393E" : "#FFFFFF",
-                                        },
-                                    }),
-                                },
-                                Button: {
-                                    styles: theme => ({
-                                        inner: {
-                                            fontWeight: 700,
-                                        },
-                                    }),
-                                },
-                            },
+                            }
                         }
-                    }
-                >
-                    <Component {...pageProps}/>
-                    <ModalController/>
-                </MantineProvider>
-            </ThemeProvider>
-        </QueryClientProvider>
+                    >
+                        <Component {...pageProps}/>
+                        <ModalController/>
+                        <Toaster
+                            position={"top-right"}
+                            containerStyle={{
+                                top: 40,
+                                right: 6,
+                                fontSize: 6
+                            }}
+                        />
+                    </MantineProvider>
+                </ThemeProvider>
+            </QueryClientProvider>
+        )
     }
 }
+
+export default Jsonier;
