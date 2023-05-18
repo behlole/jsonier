@@ -1,11 +1,11 @@
-import { decompressFromBase64 } from "lz-string";
+import {decompressFromBase64} from "lz-string";
 import toast from "react-hot-toast";
-import { create } from "zustand";
-import { altogic } from "src/api/altogic";
-import { defaultJson } from "src/constants/data";
-import { saveJson as saveJsonDB } from "src/services/db/json";
+import {create} from "zustand";
+import {defaultJson} from "src/constants/data";
+import {saveJson as saveJsonDB} from "src/services/db/json";
 import useGraph from "src/store/useGraph";
-import { Json } from "src/typings/altogic";
+import {Json} from "src/typings/altogic";
+import altogic from "../api/altogic";
 
 interface JsonActions {
     setJson: (json: string) => void;
@@ -51,14 +51,14 @@ const useJson = create<JsonStates & JsonActions>()((set, get) => ({
                 const jsonStr = JSON.stringify(json, null, 2);
 
                 useGraph.getState().setGraph(jsonStr);
-                return set({ json: jsonStr, loading: false });
+                return set({json: jsonStr, loading: false});
             } catch (error) {
                 useGraph.getState().setGraph(defaultJson);
-                set({ json: defaultJson, loading: false });
+                set({json: defaultJson, loading: false});
                 toast.error("Failed to fetch JSON from URL!");
             }
         } else if (jsonId) {
-            const { data, errors } = await altogic.endpoint.get(`json/${jsonId}`, undefined, {
+            const {data, errors} = await altogic.endpoint.get(`json/${jsonId}`, undefined, {
                 userid: altogic.auth.getUser()?._id,
             });
 
@@ -77,15 +77,15 @@ const useJson = create<JsonStates & JsonActions>()((set, get) => ({
 
         if (inIframe()) {
             useGraph.getState().setGraph("[]");
-            return set({ json: "[]", loading: false });
+            return set({json: "[]", loading: false});
         } else {
             useGraph.getState().setGraph(defaultJson);
-            set({ json: defaultJson, loading: false });
+            set({json: defaultJson, loading: false});
         }
     },
     setJson: json => {
         useGraph.getState().setGraph(json);
-        set({ json, hasChanges: true });
+        set({json, hasChanges: true});
     },
     saveJson: async (isNew = true) => {
         try {
@@ -93,26 +93,26 @@ const useJson = create<JsonStates & JsonActions>()((set, get) => ({
             const params = new URLSearchParams(url.search);
             const jsonQuery = params.get("json");
 
-            toast.loading("Saving JSON...", { id: "jsonSave" });
-            const res = await saveJsonDB({ id: isNew ? undefined : jsonQuery, data: get().json });
+            toast.loading("Saving JSON...", {id: "jsonSave"});
+            const res = await saveJsonDB({id: isNew ? undefined : jsonQuery, data: get().json});
 
             if (res.errors && res.errors.items.length > 0) throw res.errors;
 
-            toast.success("JSON saved to cloud", { id: "jsonSave" });
-            set({ hasChanges: false });
+            toast.success("JSON saved to cloud", {id: "jsonSave"});
+            set({hasChanges: false});
             return res.data._id;
         } catch (error: any) {
             if (error?.items?.length > 0) {
-                toast.error(error.items[0].message, { id: "jsonSave", duration: 5000 });
+                toast.error(error.items[0].message, {id: "jsonSave", duration: 5000});
                 return undefined;
             }
 
-            toast.error("Failed to save JSON!", { id: "jsonSave" });
+            toast.error("Failed to save JSON!", {id: "jsonSave"});
             return undefined;
         }
     },
-    setError: (hasError: boolean) => set({ hasError }),
-    setHasChanges: (hasChanges: boolean) => set({ hasChanges }),
+    setError: (hasError: boolean) => set({hasError}),
+    setHasChanges: (hasChanges: boolean) => set({hasChanges}),
 }));
 
 export default useJson;
