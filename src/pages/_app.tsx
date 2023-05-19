@@ -3,7 +3,7 @@ import React from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ThemeProvider} from "styled-components";
 import {MantineProvider} from "@mantine/core";
-import {BrowserTracing, init, Replay} from "@sentry/nextjs";
+import {init} from "@sentry/nextjs";
 import localFont from "next/font/local";
 import {useStored} from "../store/useStored";
 import {darkTheme, lightTheme} from "../constants/theme";
