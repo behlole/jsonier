@@ -30,7 +30,7 @@ dayjs.extend(relativeTime);
 const StyledJsonCard = styled.a<{ active?: boolean; create?: boolean }>`
   display: ${({create}: any) => {
     return (create ? "block" : "flex");
-  }};
+}};
   align-items: center;
   justify-content: space-between;
   background: ${({theme}) => theme.BLACK_SECONDARY};
@@ -38,7 +38,7 @@ const StyledJsonCard = styled.a<{ active?: boolean; create?: boolean }>`
   padding: 6px;
   border: 2px solid ${({theme, active}: any) => {
     return (active ? theme.SEAGREEN : theme.BLACK_SECONDARY);
-  }};
+}};
   border-radius: 5px;
   overflow: hidden;
   flex: 1;

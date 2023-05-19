@@ -1,19 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { Modal, Group, Button, Badge, Avatar, Grid, Divider, ModalProps } from "@mantine/core";
-import { IoRocketSharp } from "react-icons/io5";
+import {Modal, Group, Button, Badge, Avatar, Grid, Divider, ModalProps} from "@mantine/core";
+import {IoRocketSharp} from "react-icons/io5";
 import useUser from "src/store/useUser";
 
 const StyledTitle = styled.div`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.TEXT_POSITIVE};
+  color: ${({theme}) => theme.TEXT_POSITIVE};
   flex: 1;
   font-weight: 700;
 
   &::after {
-    background: ${({ theme }) => theme.TEXT_POSITIVE};
+    background: ${({theme}) => theme.TEXT_POSITIVE};
     height: 1px;
 
     content: "";
@@ -33,94 +33,94 @@ const StyledContainer = styled.div`
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
-  color: ${({ theme }) => theme.INTERACTIVE_NORMAL};
+  color: ${({theme}) => theme.INTERACTIVE_NORMAL};
 
   & > div {
     font-weight: 400;
     font-size: 14px;
-    color: ${({ theme }) => theme.INTERACTIVE_ACTIVE};
+    color: ${({theme}) => theme.INTERACTIVE_ACTIVE};
   }
 `;
 
-export const AccountModal: React.FC<ModalProps> = ({ opened, onClose }) => {
-  const user = useUser(state => state.user);
-  const isPremium = useUser(state => state.isPremium());
-  const logout = useUser(state => state.logout);
+export const AccountModal: React.FC<ModalProps> = ({opened, onClose}) => {
+    const user = useUser(state => state.user);
+    const isPremium = useUser(state => state.isPremium());
+    const logout = useUser(state => state.logout);
 
-  return (
-    <Modal title="Account" opened={opened} onClose={onClose} centered>
-      <StyledTitle>Hello, {user?.name}!</StyledTitle>
-      <Group py="sm">
-        <Grid gutter="xs">
-          <Grid.Col span={2}>
-            <Avatar size="lg" radius="lg" src={user?.profilePicture} alt={user?.name} />
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <StyledContainer>
-              USERNAME
-              <div>{user?.name}</div>
-            </StyledContainer>
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <StyledContainer>
-              ACCOUNT STATUS
-              <div>
+    return (
+        <Modal title="Account" opened={opened} onClose={onClose} centered>
+            <StyledTitle>Hello, {user?.name}!</StyledTitle>
+            <Group py="sm">
+                <Grid gutter="xs">
+                    <Grid.Col span={2}>
+                        <Avatar size="lg" radius="lg" src={user?.profilePicture} alt={user?.name}/>
+                    </Grid.Col>
+                    <Grid.Col span={4}>
+                        <StyledContainer>
+                            USERNAME
+                            <div>{user?.name}</div>
+                        </StyledContainer>
+                    </Grid.Col>
+                    <Grid.Col span={6}>
+                        <StyledContainer>
+                            ACCOUNT STATUS
+                            <div>
+                                {isPremium ? (
+                                    <Badge>Premium</Badge>
+                                ) : (
+                                    <Badge variant="outline" color="gray">
+                                        Free
+                                    </Badge>
+                                )}
+                            </div>
+                        </StyledContainer>
+                    </Grid.Col>
+                    <Grid.Col span={6}>
+                        <StyledContainer>
+                            EMAIL
+                            <div>{user?.email}</div>
+                        </StyledContainer>
+                    </Grid.Col>
+                    <Grid.Col span={4}>
+                        <StyledContainer>
+                            REGISTRATION
+                            <div>{user?.signUpAt && new Date(user.signUpAt).toDateString()}</div>
+                        </StyledContainer>
+                    </Grid.Col>
+                </Grid>
+            </Group>
+            <Divider py="xs"/>
+            <Group position="right">
                 {isPremium ? (
-                  <Badge>Premium</Badge>
+                    <Button
+                        variant="light"
+                        color="red"
+                        onClick={() => window.open("https://patreon.com/herowand", "_blank")}
+                        leftIcon={<IoRocketSharp/>}
+                    >
+                        Cancel Subscription
+                    </Button>
                 ) : (
-                  <Badge variant="outline" color="gray">
-                    Free
-                  </Badge>
+                    <Link href="/pricing" target="_blank" rel="noreferrer">
+                        <Button
+                            variant="gradient"
+                            gradient={{from: "teal", to: "lime", deg: 105}}
+                            leftIcon={<IoRocketSharp/>}
+                        >
+                            UPGRADE TO PREMIUM!
+                        </Button>
+                    </Link>
                 )}
-              </div>
-            </StyledContainer>
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <StyledContainer>
-              EMAIL
-              <div>{user?.email}</div>
-            </StyledContainer>
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <StyledContainer>
-              REGISTRATION
-              <div>{user?.signUpAt && new Date(user.signUpAt).toDateString()}</div>
-            </StyledContainer>
-          </Grid.Col>
-        </Grid>
-      </Group>
-      <Divider py="xs" />
-      <Group position="right">
-        {isPremium ? (
-          <Button
-            variant="light"
-            color="red"
-            onClick={() => window.open("https://patreon.com/herowand", "_blank")}
-            leftIcon={<IoRocketSharp />}
-          >
-            Cancel Subscription
-          </Button>
-        ) : (
-          <Link href="/pricing" target="_blank" rel="noreferrer">
-            <Button
-              variant="gradient"
-              gradient={{ from: "teal", to: "lime", deg: 105 }}
-              leftIcon={<IoRocketSharp />}
-            >
-              UPGRADE TO PREMIUM!
-            </Button>
-          </Link>
-        )}
-        <Button
-          color="red"
-          onClick={() => {
-            logout();
-            onClose();
-          }}
-        >
-          Log Out
-        </Button>
-      </Group>
-    </Modal>
-  );
+                <Button
+                    color="red"
+                    onClick={() => {
+                        logout();
+                        onClose();
+                    }}
+                >
+                    Log Out
+                </Button>
+            </Group>
+        </Modal>
+    );
 };
