@@ -14,8 +14,8 @@ import {VscAccount} from "react-icons/vsc";
 import {saveJson, updateJson} from "src/services/db/json";
 import useJson from "src/store/useJson";
 import useModal from "src/store/useModal";
-import useStored from "src/store/useStored";
 import useUser from "src/store/useUser";
+import {useStored} from "../../store/useStored";
 
 const StyledBottomBar = styled.div`
   display: flex;
@@ -77,7 +77,7 @@ export const BottomBar = () => {
     const {replace, query} = useRouter();
     const data = useJson(state => state.data);
     const user = useUser(state => state.user);
-    const lightmode = useStored(state => state.lightmode);
+    const lightmode = useStored(state => state.lightMode);
     const hasChanges = useJson(state => state.hasChanges);
 
     const getJson = useJson(state => state.getJson);
