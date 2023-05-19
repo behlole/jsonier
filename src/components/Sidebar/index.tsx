@@ -241,11 +241,6 @@ export const Sidebar: React.FC = () => {
             </StyledTopWrapper>
             <StyledBottomWrapper>
                 <SidebarButton
-                    title="Account"
-                    onClick={() => setVisible("account")(true)}
-                    component={<VscAccount/>}
-                />
-                <SidebarButton
                     title="Settings"
                     onClick={() => setVisible("settings")(true)}
                     component={<VscSettingsGear/>}

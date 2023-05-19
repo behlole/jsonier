@@ -1,14 +1,14 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import { Center, Image, Stack, Title } from "@mantine/core";
+import styled, {keyframes} from "styled-components";
+import {Center, Image, Stack, Title} from "@mantine/core";
 
 interface LoadingProps {
-  loading?: boolean;
-  message?: string;
+    loading?: boolean;
+    message?: string;
 }
 
 const fadeIn = keyframes`
- 99% {
+  99% {
     visibility: hidden;
   }
   100% {
@@ -17,7 +17,7 @@ const fadeIn = keyframes`
 `;
 
 const StyledLoading = styled.div<{ visible: boolean }>`
-  display: ${({ visible }) => (visible ? "grid" : "none")};
+  display: ${({visible}) => (visible ? "grid" : "none")};
   position: fixed;
   top: 0;
   left: 0;
@@ -39,25 +39,23 @@ const StyledLoading = styled.div<{ visible: boolean }>`
 `;
 
 const StyledText = styled.span`
-  color: #faa81a;
+  color: #211afa;
 `;
-
 const StyledMessage = styled.div`
   color: #b9bbbe;
   font-size: 32px;
   font-weight: 600;
 `;
 
-export const Loading: React.FC<LoadingProps> = ({ loading = true, message }) => (
-  <Center mx="auto">
-    <StyledLoading visible={loading}>
-      <Stack>
-        <Image maw={150} src="./assets/rocket_ship.webp" alt="loading image" />
-        <Title size="4rem">
-          <StyledText>JSON</StyledText> Crack
-        </Title>
-        <StyledMessage>{message ?? "Preparing the environment for you..."}</StyledMessage>
-      </Stack>
-    </StyledLoading>
-  </Center>
+export const Loading: React.FC<LoadingProps> = ({loading = true, message}) => (
+    <Center mx="auto">
+        <StyledLoading visible={loading}>
+            <Stack>
+                <Title size="4rem">
+                    <StyledText>JSONIER</StyledText>
+                </Title>
+                <StyledMessage>{message ?? "Preparing the environment for you..."}</StyledMessage>
+            </Stack>
+        </StyledLoading>
+    </Center>
 );
