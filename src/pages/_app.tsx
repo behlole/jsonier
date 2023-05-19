@@ -22,10 +22,7 @@ const queryClient = new QueryClient({
 if (process.env.NODE_ENV != 'development') {
     init({
         dsn: "https://8848490511b64a75a2c1b32c55fd84a1@o4505191322025984.ingest.sentry.io/4505191323729920",
-        integrations: [new BrowserTracing(), new Replay()],
-        // Performance Monitoring
         tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
-        // Session Replay
         replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
         replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
     });
