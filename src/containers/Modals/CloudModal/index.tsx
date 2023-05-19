@@ -19,7 +19,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import toast from "react-hot-toast";
 import {AiOutlineEdit, AiOutlineLock, AiOutlinePlus, AiOutlineUnlock} from "react-icons/ai";
 import {FaTrash} from "react-icons/fa";
-import {IoRocketSharp} from "react-icons/io5";
 import {deleteJson, getAllJson, saveJson, updateJson} from "src/services/db/json";
 import useJson from "src/store/useJson";
 import useUser from "src/store/useUser";

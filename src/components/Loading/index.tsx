@@ -1,6 +1,6 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import {Center, Image, Stack, Title} from "@mantine/core";
+import {Center, Stack, Title} from "@mantine/core";
 
 interface LoadingProps {
     loading?: boolean;

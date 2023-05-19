@@ -1,7 +1,5 @@
 import {create} from "zustand";
 import {persist} from "zustand/middleware";
-import {set} from "zod";
-
 type Sponsor = {
     handle: String,
     avatar: String,
