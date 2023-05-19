@@ -1,4 +1,4 @@
-import { altogic, AltogicResponse } from "src/api/altogic";
+import altogic, { AltogicResponse } from "src/api/altogic";
 
 const getPartnerStatus = async (
   parentURL: string
