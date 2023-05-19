@@ -184,7 +184,7 @@ export const Sidebar: React.FC = () => {
             <StyledTopWrapper>
                 <StyledElement href="/" as={StyledLogo}>
                     <StyledText>J</StyledText>
-                    <StyledText secondary>C</StyledText>
+                    <StyledText secondary>{"{}"}</StyledText>
                 </StyledElement>
 
                 <SidebarButton
