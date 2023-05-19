@@ -1,3 +1,4 @@
+import React from "react";
 import {ThemeProvider} from "styled-components";
 import {darkTheme} from "src/constants/theme";
 import Editor from "./editor";
@@ -9,3 +10,4 @@ const HomePage = () => {
         </ThemeProvider>
     )
 }
+export default HomePage;
