@@ -10,7 +10,6 @@ import {darkTheme, lightTheme} from "../constants/theme";
 import GlobalStyle from "../constants/globalStyle";
 import ModalController from "../containers/ModalController";
 import {Toaster} from "react-hot-toast";
-
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
